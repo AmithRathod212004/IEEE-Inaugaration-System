@@ -112,7 +112,7 @@ class InaugurationApp(tk.Tk):
             self._launch_inauguration_video()
             return
 
-        self.after(40, self._update_detection_loop)
+        self.after(self.config_data.detection_loop_interval_ms, self._update_detection_loop)
 
     def _launch_inauguration_video(self) -> None:
         video_path = resolve_asset(self.config_data.video_file)

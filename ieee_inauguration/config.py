@@ -14,6 +14,7 @@ class AppConfig:
     logo_file: str = "assets/event_logo.png"
     camera_index: int = 0
     required_consecutive_detections: int = 8
+    detection_loop_interval_ms: int = 40
 
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
