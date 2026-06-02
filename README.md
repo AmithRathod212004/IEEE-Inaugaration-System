@@ -1,4 +1,4 @@
-# IEEE-Inaugaration-System
+# IEEE-Inauguration-System
 
 IEEE Inauguration System is a Python computer-vision launch portal for the IEEE Women in Engineering (WIE) **"Aadhya"** inauguration event.
 

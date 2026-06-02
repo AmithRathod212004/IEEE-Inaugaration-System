@@ -103,7 +103,10 @@ class InaugurationApp(tk.Tk):
             cv2.imshow("IEEE Inauguration Gesture Detection", result.frame)
             cv2.waitKey(1)
 
-        self.detected_frames = self.detected_frames + 1 if result.detected else 0
+        if result.detected:
+            self.detected_frames += 1
+        else:
+            self.detected_frames = 0
 
         if self.detected_frames >= self.config_data.required_consecutive_detections:
             self._launch_inauguration_video()

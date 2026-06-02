@@ -5,13 +5,12 @@ from __future__ import annotations
 import subprocess
 import sys
 from pathlib import Path
-from typing import List
 
 
 class VideoLauncher:
     """Launches the inauguration video with the default system player."""
 
-    def build_launch_command(self, video_path: Path) -> List[str]:
+    def build_launch_command(self, video_path: Path) -> list[str]:
         path = str(video_path)
         if sys.platform.startswith("win"):
             return ["cmd", "/c", "start", "", path]
