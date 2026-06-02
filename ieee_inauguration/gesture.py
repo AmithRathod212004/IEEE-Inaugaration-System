@@ -32,6 +32,8 @@ class GestureResult:
 
 
 def _is_thumb_up(landmarks: Iterable[Any]) -> bool:
+    """Check thumbs-up using image coordinates where smaller y is higher on screen."""
+
     lm = list(landmarks)
     thumb_extended = lm[THUMB_TIP].y < lm[THUMB_IP].y < lm[THUMB_MCP].y
     other_fingers_folded = all(

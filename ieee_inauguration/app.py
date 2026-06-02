@@ -85,7 +85,7 @@ class InaugurationApp(tk.Tk):
             messagebox.showerror("Camera Error", "Unable to open webcam.")
             return
 
-        self.status_label.config(text="Detection started. Hold Two Thumbs Up...")
+        self.status_label.config(text="Detection started. Show Two Thumbs Up...")
         self._update_detection_loop()
 
     def _update_detection_loop(self) -> None:

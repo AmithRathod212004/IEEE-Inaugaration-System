@@ -29,8 +29,11 @@ class VideoLauncherTests(unittest.TestCase):
         with patch.object(VideoLauncher, "build_launch_command", return_value=["xdg-open", "video.mp4"]), patch(
             "subprocess.Popen"
         ) as popen:
-            launcher.launch(Path("video.mp4"))
+            process = object()
+            popen.return_value = process
+            returned_process = launcher.launch(Path("video.mp4"))
             popen.assert_called_once_with(["xdg-open", "video.mp4"])
+            self.assertIs(returned_process, process)
 
 
 if __name__ == "__main__":
