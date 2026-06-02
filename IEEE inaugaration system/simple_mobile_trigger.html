@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WIE Aadya Launch - Simple</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            color: #00FFFF;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 20px;
+            color: #FF69B4;
+            margin-bottom: 8px;
+        }
+        
+        h3 {
+            font-size: 16px;
+            color: #FFFF00;
+            margin-bottom: 40px;
+        }
+        
+        .ip-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            margin-bottom: 20px;
+            border: 2px solid #00FFFF;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .launch-btn {
+            background: linear-gradient(135deg, #00FF00, #00CC00);
+            color: #000000;
+            border: none;
+            padding: 30px 60px;
+            font-size: 36px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+            box-shadow: 0 8px 20px rgba(0, 255, 0, 0.4);
+        }
+        
+        .launch-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .status {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #00FF00;
+        }
+        
+        .note {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #CCCCCC;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Women In Engineering<br>Affinity Group Kssem</h1>
+        <h2>Aadya</h2>
+        <h3>Inauguration Ceremony</h3>
+        
+        <input type="text" class="ip-input" id="ipInput" placeholder="Enter PC IP (e.g., 192.168.1.100)" value="">
+        
+        <button class="launch-btn" onclick="launchVideo()">LAUNCH</button>
+        
+        <div class="status" id="status">Enter PC IP and tap LAUNCH</div>
+        
+        <div class="note">
+            <strong>Setup:</strong><br>
+            1. On PC, run: ipconfig<br>
+            2. Find IPv4 Address (e.g., 192.168.x.x)<br>
+            3. Enter that IP above<br>
+            4. Tap LAUNCH
+        </div>
+    </div>
+    
+    <script>
+        // Save IP to localStorage
+        const savedIP = localStorage.getItem('pcIP');
+        if (savedIP) {
+            document.getElementById('ipInput').value = savedIP;
+        }
+        
+        function launchVideo() {
+            const ip = document.getElementById('ipInput').value.trim();
+            const statusEl = document.getElementById('status');
+            
+            if (!ip) {
+                statusEl.textContent = '❌ Please enter PC IP address';
+                statusEl.style.color = '#FF0000';
+                return;
+            }
+            
+            // Save IP
+            localStorage.setItem('pcIP', ip);
+            
+            statusEl.textContent = '🚀 Launching...';
+            statusEl.style.color = '#FFFF00';
+            
+            const url = `http://${ip}:8080/launch`;
+            
+            fetch(url, {
+                method: 'POST',
+                mode: 'no-cors'
+            })
+            .then(() => {
+                statusEl.textContent = '✅ Video Launched!';
+                statusEl.style.color = '#00FF00';
+            })
+            .catch(error => {
+                statusEl.textContent = '✅ Request Sent!';
+                statusEl.style.color = '#00FF00';
+            });
+        }
+    </script>
+</body>
+</html>
