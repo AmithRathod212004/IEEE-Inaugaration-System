@@ -120,7 +120,11 @@ class InaugurationApp(tk.Tk):
             messagebox.showerror("Asset Missing", f"Video file not found: {video_path}")
             return
 
-        self.video_launcher.launch(video_path)
+        try:
+            self.video_launcher.launch(video_path)
+        except RuntimeError as exc:
+            messagebox.showerror("Launch Error", str(exc))
+            return
         self._video_launched = True
         self.status_label.config(text="Inauguration video launched successfully!")
         self._cleanup_capture()

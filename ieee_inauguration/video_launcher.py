@@ -20,4 +20,7 @@ class VideoLauncher:
 
     def launch(self, video_path: Path) -> subprocess.Popen:
         command = self.build_launch_command(video_path)
-        return subprocess.Popen(command)
+        try:
+            return subprocess.Popen(command, shell=False)
+        except OSError as exc:
+            raise RuntimeError(f"Unable to launch video: {video_path}") from exc
